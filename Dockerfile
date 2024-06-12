@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package.json ./
 run npm install --production
 COPY . .
-RUN npm run builder
+RUN npm run build
+
 EXPOSE 3000
-CMD [ "npm","run","dev" ]
+CMD [ "npm","run","start" ]
