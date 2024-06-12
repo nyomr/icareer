@@ -16,7 +16,7 @@ jobs:
       - name: Build docker image
         run: docker build -t njul/fp-pso .
       - name: Login to docker hub
-        run: docker login -u ${{ secrets.DOCKER.USERNAME }} -p ${{ secrets.DOCKER.PASSWORD }}
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Publish image to docker hub
         run: docker push njul/fp-pso:latest
 
