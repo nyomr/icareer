@@ -8,7 +8,7 @@ ARG SITE_URL_ENV
 ENV MONGO_PASSWORD=$MONGO_PASSWORD_ENV
 ENV SITE_URL_ENV=$SITE_URL_ENV
 
-WORKDIR /src/app
+WORKDIR /app
 COPY package*.json ./
 RUN  npm install --production
 COPY . .
