@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
+    steps: 
       - name: Checkout Source
         uses: actions/checkout@v4
       - name: Create .env file
@@ -20,14 +20,13 @@ jobs:
       - name: Publish image to docker hub
         run: docker push njul/fp-pso:latest
 
-
   deploy:
     needs: build
-    runs-on: self-hosted  
+    runs-on: self-hosted
     steps:
       - name: Pull image from docker hub
         run: docker pull njul/fp-pso:latest
       - name: Delete old container
-        run: docker rm -f fp-pso-container 
+        run: docker rm -f fp-pso-container  
       - name: Run docker container
-        run: docker run -d -p 3000:3000 --name fp-pso-container njul/fp-pso
+        run: docker run -d -p 3000:3000 --name fp-pso-container njul/fp-pso 
