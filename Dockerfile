@@ -2,7 +2,7 @@ FROM node:20.14.0-alpine as builder
 
 WORKDIR /app
 COPY package.json ./
-run npm install
+run npm install --production
 COPY . .
 RUN npm run build
 
