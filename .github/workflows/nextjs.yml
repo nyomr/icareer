@@ -1,4 +1,4 @@
-name : Deploy Next.js application 
+name : CI Pipeline
 
 on:
   push:
@@ -8,25 +8,31 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps: 
       - name: Checkout Source
         uses: actions/checkout@v4
-      - name: Create .env file
-        run: echo "MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }}" >> .env && echo "SITE_URL=${{ secrets.SITE_URL }}" >> .env
-      - name: Build docker image
-        run: docker build -t njul/fp-pso .
-      - name: Login to docker hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - name: Publish image to docker hub
-        run: docker push njul/fp-pso:latest
 
-  deploy:
-    needs: build
-    runs-on: self-hosted
-    steps:
-      - name: Pull image from docker hub
-        run: docker pull njul/fp-pso:latest
-      - name: Delete old container
-        run: docker rm -f fp-pso-container  
-      - name: Run docker container
-        run: docker run -d -p 3000:3000 --name fp-pso-container njul/fp-pso 
+      - name: Set up NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.14.0'
+      
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build App
+        run: npm run build
+
+      - name: Run Test
+        run: npm test
+      
+      - name: Docker build
+        run: docker build -t icareer .
+  
+      - name: Docker run (for development purpose)
+        run: docker run -d -p 3000:3000 icareer
+  
+      - name: Check if app is running (basic health check)
+        run: curl -f http://localhost:3000 || exit 1
+      
