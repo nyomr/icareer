@@ -24,8 +24,7 @@ jobs:
       - name: Build App
         run: npm run build
 
-      # - name: Run Test
-      #   run: npm test
+
       
       - name: Docker build
         run: docker build -t icareer .
