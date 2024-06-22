@@ -24,8 +24,6 @@ jobs:
       - name: Build App
         run: npm run build
 
-
-      
       - name: Docker build
         run: docker build -t icareer .
   
@@ -37,4 +35,24 @@ jobs:
   
       - name: Check if app is running (basic health check)
         run: curl -f http://localhost:3000 || exit 1
+
+  test:
+    runs-on: ubuntu-latest
+
+    needs: build  
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Set up NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.14.0'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
       
