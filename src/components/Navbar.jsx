@@ -2,13 +2,8 @@
 import Link from 'next/link';
 import React from 'react';
 import Button from './Button';
-import { useRouter } from "next/navigation";
 
 function Navbar() {
-  const router = useRouter();
-  const handleNav = () => {
-    router.push('/app');
-  };
   return (
     <nav className="navbar-class flex-initial">
         <div className="flex justify-between items-center px-20 my-3">
@@ -21,7 +16,7 @@ function Navbar() {
                 About
               </Link>
               <Link href={'/app'} className="button-link">
-                <Button text="Launch App" onClick={handleNav} style={{padding: '10px 20px', backgroundColor: 'blue', color: 'white', border: 'none', borderRadius: '5px'}}>
+                <Button text="Launch App" style={{padding: '10px 20px', backgroundColor: 'blue', color: 'white', border: 'none', borderRadius: '5px'}}>
                 </Button>
               </Link>
             </div>

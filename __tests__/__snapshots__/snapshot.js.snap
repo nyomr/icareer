@@ -1,16 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders homepage unchanged 1`] = `
+exports[`Home Page renders homepage unchanged 1`] = `
 <div>
-  <div>
-    <h1>
-      Home
-    </h1>
-    <a
-      href="/about"
+  <div
+    class="full-home relative items-center justify-center"
+  >
+    <div
+      class="absolute w-[500px] h-[550px] bg-[#EC458D] rounded-full blur-[200px] top-[10%] left-[10%] translate-x-[-50%] translate-y-[-50%] -z-10"
+    />
+    <div
+      class="absolute w-[500px] h-[550px] bg-[#474ED7] rounded-full blur-[300px] top-[20%] left-[40%] translate-x-[-50%] translate-y-[-50%] -z-10"
+    />
+    <nav
+      class="navbar-class flex-initial"
     >
-      About
-    </a>
+      <div
+        class="flex justify-between items-center px-20 my-3"
+      >
+        <a
+          href="/"
+        >
+          <div
+            class="text-white font-inter"
+          >
+            iCareer
+          </div>
+        </a>
+        <div
+          class="hidden md:flex space-x-7"
+        >
+          <a
+            class="link"
+            href="/about"
+          >
+            About
+          </a>
+          <a
+            class="button-link"
+            href="/app"
+          >
+            <button
+              class="btn font-inter my-auto container"
+            >
+              Launch App
+            </button>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <main
+      class="hero-welcome px-20 min-h-screen grid place-items-center max-w-4xl"
+    >
+      <div
+        class="hero-content"
+      >
+        <h1
+          class="title-hero font-inter"
+        >
+          Find Your Dream in the World of Career
+        </h1>
+        <p
+          class="sub-title-hero font-inter py-4"
+        >
+          Dive into the world of careers and discover your perfect fit. Start exploring today!
+        </p>
+      </div>
+    </main>
   </div>
 </div>
 `;
