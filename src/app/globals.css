@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap');
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -29,5 +30,45 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .navbar-class {
+    color: transparent;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: sticky;
+    top: 0;
+    background-color: transparent;
+    z-index: 50;
+  }
+  .link {
+    font-size: 20px;
+    @apply text-white py-2 px-4 rounded cursor-pointer;
+
+  }
+  .text-white.font-inter {
+    font-weight: 600;
+    font-size: 24px;
+  }
+  .btn.font-inter{
+    @apply font-bold py-2 px-4 rounded;
+    background-color: #282D34;
+    color: #fff;
+    font-weight: 500;
+  }
+  .btn.font-inter:hover {
+    background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%);;
+    color: #ffffff;
+  }
+  .title-hero {
+    font-size: 80px;
+    line-height: 120%;
+  }
+  .latest-jobs {
+    font-size: 40px;
+    font-weight: 600;
+  }
+  .sub-title-hero {
+    font-size: 18px;
+    max-width: 380px;
   }
 }
