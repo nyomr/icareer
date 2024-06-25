@@ -60,7 +60,7 @@ resource "aws_security_group" "allow_http_ssh" {
 
 resource "aws_instance" "i-career" {
   ami           = "ami-01b799c439fd5516a"
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
   key_name      = aws_key_pair.service_key_pair.key_name
   vpc_security_group_ids = [aws_security_group.allow_http_ssh.id]
 
