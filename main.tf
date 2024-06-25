@@ -19,8 +19,8 @@ resource "tls_private_key" "rsa_4096" {
 }
 
 variable "key_name" {
-  description = "terraform-key"
-  default     = "terraform-key"  
+  description = "icareer-key"
+  default     = "icareer-key"  
 }
 
 resource "aws_key_pair" "service_key_pair" {
@@ -58,7 +58,7 @@ resource "aws_security_group" "allow_http_ssh" {
 }
 
 resource "aws_instance" "public_instance" {
-  ami = "ami-04b70fa74e45c3917"
+  ami = "ami-01b799c439fd5516a"
   instance_type = "t2.micro"
   key_name = aws_key_pair.service_key_pair.key_name
   vpc_security_group_ids = [aws_security_group.allow_http_ssh.id]
