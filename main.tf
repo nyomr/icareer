@@ -35,7 +35,7 @@ resource "local_file" "private_key" {
 resource "aws_instance" "my_instance" {
   ami           = "ami-01b799c439fd5516a"
   instance_type = "t2.micro"
-  key_name      = aws_key_pair.service_key_pair.key_name
+  key_name      = "terraform.key"
   tags = {
     Name = "i-career"
   }
@@ -48,14 +48,6 @@ resource "aws_instance" "my_instance" {
       "docker ps"
     ]
 
-   # connection {
-   #   type        = "ssh"
-   #   user        = "ubuntu"
-   #   private_key = file("~/.ssh/terraform-key.pem")
-   #   host        = aws_instance.my_instance.public_ip
-   # }
-  }
-}
 
 output "instance_ip" {
   value = aws_instance.my_instance.public_ip
