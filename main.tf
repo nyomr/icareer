@@ -33,10 +33,37 @@ resource "local_file" "private_key" {
   filename = "${var.key_name}.pem"
 }
 
-resource "aws_instance" "nasigoreng" {
+resource "aws_security_group" "allow_http_ssh" {
+  description = "Allow HTTP and SSH inbound traffic"
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 3000
+    to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_instance" "i-career" {
   ami           = "ami-01b799c439fd5516a"
   instance_type = "t2.micro"
   key_name      = aws_key_pair.service_key_pair.key_name
+  vpc_security_group_ids = [aws_security_group.allow_http_ssh.id]
+
   tags = {
     Name = "i-career"
   }
