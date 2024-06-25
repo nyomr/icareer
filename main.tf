@@ -13,10 +13,29 @@ provider "aws" {
   secret_key = "allbbOvWuRxnMn81+Ijo16p2KBWO5DtsFcIt/Sj0"
 }
 
+resource "tls_private_key" "rsa_4096" {
+  algorithm = "RSA"
+  rsa_bits = 4096
+}
+
+variable "key_name" {
+  description = "terraform-key"
+  default     = "terraform-key"  
+}
+
+resource "aws_key_pair" "service_key_pair" {
+  public_key = tls_private_key.rsa_4096.public_key_openssh
+}
+
+resource "local_file" "private_key" {
+  content = tls_private_key.rsa_4096.private_key_pem
+  filename = var.key_name
+}
+
 resource "aws_instance" "my_instance" {
   ami           = "ami-01b799c439fd5516a"
   instance_type = "t2.micro"
-  key_name      = "key-ec2"
+  key_name      = aws_key_pair.service_key_pair.key_name
   tags = {
     Name = "i-career"
   }
@@ -32,7 +51,7 @@ resource "aws_instance" "my_instance" {
     connection {
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file("~/.ssh/key-ec2.pem")
+      private_key = file("~/.ssh/terraform-key.pem")
       host        = aws_instance.my_instance.public_ip
     }
   }
