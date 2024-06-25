@@ -48,12 +48,12 @@ resource "aws_instance" "my_instance" {
       "docker ps"
     ]
 
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = file("~/.ssh/terraform-key.pem")
-      host        = aws_instance.my_instance.public_ip
-    }
+   # connection {
+   #   type        = "ssh"
+   #   user        = "ubuntu"
+   #   private_key = file("~/.ssh/terraform-key.pem")
+   #   host        = aws_instance.my_instance.public_ip
+   # }
   }
 }
 
