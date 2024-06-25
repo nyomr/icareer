@@ -46,9 +46,9 @@ resource "aws_instance" "my_instance" {
       "sudo apt upgrade -y",
       "docker --version",
       "docker ps"
-    ]
+      ]
   }
-
+}
 
 output "instance_ip" {
   value = aws_instance.my_instance.public_ip
