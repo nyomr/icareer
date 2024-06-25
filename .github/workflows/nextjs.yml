@@ -23,7 +23,7 @@ jobs:
         run: npm install
 
       - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: "4.0.0"
 
