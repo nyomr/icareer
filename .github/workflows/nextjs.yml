@@ -99,6 +99,12 @@ jobs:
       - name: Terraform Destroy
         run: terraform destroy -auto-approve
 
+      - name: Terraform Destroy
+        run: terraform destroy -target=aws_key_pair.service_key_pair -auto-approve
+
+      - name: Terraform Destroy
+        run: terraform destroy -target=local_file.private_key -auto-approve
+
       - name: Terraform Plan
         run: terraform plan -out=tfplan
 
