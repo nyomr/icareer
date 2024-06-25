@@ -58,7 +58,7 @@ resource "aws_security_group" "allow_http_ssh" {
 }
 
 resource "aws_instance" "public_instance" {
-  ami = "ami-0eaf7c3456e7b5b68"
+  ami = "ami-0c7c372d7193f3428"
   instance_type = "t2.micro"
   key_name = aws_key_pair.service_key_pair.key_name
   vpc_security_group_ids = [aws_security_group.allow_http_ssh.id]
