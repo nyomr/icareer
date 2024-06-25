@@ -80,22 +80,29 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
+          inline-session-policy: >-
+            {
+            	"Version": "2012-10-17",
+            	"Statement": [
+            		{
+            			"Sid": "Statement1",
+            			"Effect": "Allow",
+            			"Action": [
+            				"ec2-instance-connect:SendSSHPublicKey",
+            				"ec2-instance-connect:SendSerialConsoleSSHPublicKey",
+            				"ec2-instance-connect:OpenTunnel",
+            				"ec2-instance-connect:*"
+            			],
+            			"Resource": [
+            				"*"
+            			]
+            		}
+            	]
+            }
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-          # inline-session-policy: >-
-          # {
-          #  "Version": "2012-10-17",
-          #  "Statement": [
-          #   {
-          #    "Sid":"Stmt1",
-          #    "Effect":"Allow",
-          #    "Action":"s3:List*",
-          #    "Resource":"*"
-          #   }
-          #  ]
-          # }
-
+          
       - name: Initialize Terraform
         run: terraform init
 
