@@ -22,6 +22,9 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Setup Environment Variables
+        run: echo "SITE_URL=${{ secrets.SITE_URL }}" >> .env
+
 
       # - name: Initialize Terraform
       #   run: terraform init
