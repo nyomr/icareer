@@ -137,14 +137,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y jq
 
-      # - name: Get SSH Private Key
-      #   id: ssh_private_key
-      #   run: |
-      #     SSH_PRIVATE_KEY=$(terraform show -json | jq -r '.values.root_module.resources[] | select(.type == "tls_private_key" and .name == "rsa_4096") | .values.private_key_pem')
-      #     echo "${SSH_PRIVATE_KEY}" > ssh_private_key.pem
-      #     chmod 600 ssh_private_key.pem
-      #     echo "::set-output name=ssh_private_key::ssh_private_key.pem"
-      #     echo "$SSH_PRIVATE_KEY"
+      - name: Get SSH Private Key
+        id: ssh_private_key
+        run: |
+          SSH_PRIVATE_KEY=$(terraform show -json | jq -r '.values.root_module.resources[] | select(.type == "tls_private_key" and .name == "rsa_4096") | .values.private_key_pem')
+          echo "${SSH_PRIVATE_KEY}" > ssh_private_key.pem
+          chmod 600 ssh_private_key.pem
+          echo "::set-output name=ssh_private_key::ssh_private_key.pem"
+          echo "$SSH_PRIVATE_KEY"
 
 
       - name: Push Docker Image to EC2 Instance
