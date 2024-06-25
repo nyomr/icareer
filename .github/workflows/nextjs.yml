@@ -77,6 +77,9 @@ jobs:
       - name: Checkout Source
         uses: actions/checkout@v4
 
+      - name: Initialize Terraform
+        run: terraform init
+
       - name: Terraform Plan
         run: terraform plan -out=tfplan
 
