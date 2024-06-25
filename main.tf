@@ -33,7 +33,7 @@ resource "local_file" "private_key" {
   filename = "${var.key_name}.pem"
 }
 
-resource "aws_instance" "my_instance" {
+resource "aws_instance" "nasigoreng" {
   ami           = "ami-01b799c439fd5516a"
   instance_type = "t2.micro"
   key_name      = aws_key_pair.service_key_pair.key_name
@@ -52,5 +52,5 @@ resource "aws_instance" "my_instance" {
 }
 
 output "instance_ip" {
-  value = aws_instance.my_instance.public_ip
+  value = aws_instance.nasigoreng.public_ip
 }
