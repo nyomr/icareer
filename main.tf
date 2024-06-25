@@ -79,5 +79,5 @@ resource "aws_instance" "i-career" {
 }
 
 output "instance_ip" {
-  value = aws_instance.nasigoreng.public_ip
+  value = aws_instance.i-career.public_ip
 }
