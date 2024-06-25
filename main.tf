@@ -2,13 +2,13 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.0"
+      version = "~> 5.0"
     }
   }
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = "ap-southeast-1"
   access_key = "AKIA3FLD5TGMVDZBTLQZ"
   secret_key = "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"
 }
@@ -28,7 +28,7 @@ resource "aws_key_pair" "service_key_pair" {
 }
 
 resource "local_file" "private_key" {
-  content = tls_private_key.rsa_4096.private_key_pem
+  content = tls_private_key.rsa_4096.private_key_pem 
   filename = var.key_name
 }
 
@@ -38,6 +38,13 @@ resource "aws_security_group" "allow_http_ssh" {
   ingress {
     from_port   = 22
     to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -59,12 +66,12 @@ resource "aws_security_group" "allow_http_ssh" {
 
 resource "aws_instance" "public_instance" {
   ami = "ami-01b799c439fd5516a"
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
   key_name = aws_key_pair.service_key_pair.key_name
   vpc_security_group_ids = [aws_security_group.allow_http_ssh.id]
 
   tags = {
-    Name = "icareer"
+    Name = "instance_terraform_2"
   }
 }
 
