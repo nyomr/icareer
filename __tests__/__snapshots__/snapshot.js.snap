@@ -30,12 +30,6 @@ exports[`Home Page renders homepage unchanged 1`] = `
           class="hidden md:flex space-x-7"
         >
           <a
-            class="link"
-            href="/about"
-          >
-            About
-          </a>
-          <a
             class="button-link"
             href="/app"
           >

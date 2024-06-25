@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import PostTable from "@/components/Table"; 
 import Search from "@/components/Search";
 
-export default function Home() {
+export default function App() {
   return (
     <div className="full-home relative">
       <div className="absolute w-[500px] h-[550px] bg-[#EC458D] rounded-full blur-[200px] top-[10%] left-[10%] transform translate-x-[-50%] -translate-y-[-50%] z-[-10]"></div>

@@ -12,9 +12,6 @@ function Navbar() {
             </Link>
             
             <div className="hidden md:flex space-x-7">
-              <Link href={'/about'} className="link">
-                About
-              </Link>
               <Link href={'/app'} className="button-link">
                 <Button text="Launch App" style={{padding: '10px 20px', backgroundColor: 'blue', color: 'white', border: 'none', borderRadius: '5px'}}>
                 </Button>

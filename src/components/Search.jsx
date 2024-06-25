@@ -39,7 +39,7 @@ const Search = () => {
         value={query}
         onChange={handleSearch}
         placeholder="Search..."
-        className="w-full p-2 border border-gray-300 rounded"
+        className="w-full p-2 border border-gray-300 rounded text-black"
       />
       {error && <p className="text-red-500 mt-2">{error}</p>}
       {result && (
