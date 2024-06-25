@@ -90,8 +90,8 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: AKIA3FLD5TGMVDZBTLQZ
-          aws-secret-access-key: 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
+          aws-access-key-id: AKIA3FLD5TGM3YFTURRH
+          aws-secret-access-key: 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
           aws-region: us-east-1
           # role-to-assume: arn:aws:iam::767398091161:user/terraform-github
           managed-session-policies: arn:aws:iam::aws:policy/AmazonEC2FullAccess
@@ -107,5 +107,5 @@ jobs:
       - name: Terraform Apply
         run: terraform apply plan.out
         env:
-          TF_VAR_access_key: AKIA3FLD5TGMVDZBTLQZ
-          TF_VAR_secret_key: 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
+          TF_VAR_access_key: AKIA3FLD5TGM3YFTURRH
+          TF_VAR_secret_key: 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
