@@ -1,4 +1,4 @@
-name : CI Pipeline
+name : CICD Pipeline
 
 on:
   push:
@@ -21,6 +21,14 @@ jobs:
       
       - name: Install Dependencies
         run: npm install
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "4.0"
+
+      - name: Initialize Terraform
+        run: terraform init
 
       - name: Build App
         run: npm run build
@@ -63,19 +71,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: STAGING
-    needs: build  
+    needs: test  
 
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
-
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: "4.0"
-
-      - name: Initialize Terraform
-        run: terraform init
 
       - name: Terraform Plan
         run: terraform plan -out=tfplan
