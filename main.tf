@@ -47,6 +47,7 @@ resource "aws_instance" "my_instance" {
       "docker --version",
       "docker ps"
     ]
+  }
 
 
 output "instance_ip" {
