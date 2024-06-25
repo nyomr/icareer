@@ -57,7 +57,7 @@ resource "aws_security_group" "allow_http_ssh" {
   }
 }
 
-resource "aws_instance" "i_career" {
+resource "aws_instance" "public_instance" {
   ami = "ami-01b799c439fd5516a"
   instance_type = "t2.micro"
   key_name = aws_key_pair.service_key_pair.key_name
@@ -69,5 +69,5 @@ resource "aws_instance" "i_career" {
 }
 
 output "instance_ip" {
-  value = aws_instance.i_career.public_ip
+  value = aws_instance.public_instance.public_ip
 }
