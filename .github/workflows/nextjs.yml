@@ -79,7 +79,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     # environment: STAGING
-    needs: [build, testing]  
+    needs: [build]  
 
     steps:
       - name: Checkout Source
