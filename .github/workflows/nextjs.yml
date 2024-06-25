@@ -93,8 +93,6 @@ jobs:
           aws-access-key-id: AKIA3FLD5TGM3YFTURRH
           aws-secret-access-key: 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
           aws-region: ap-southeast-2
-          # role-to-assume: arn:aws:iam::767398091161:user/terraform-github
-          managed-session-policies: arn:aws:iam::aws:policy/AmazonEC2FullAccess
           
       - name: Initialize Terraform
         id: init
