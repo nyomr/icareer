@@ -49,9 +49,6 @@ jobs:
 
       - name: Publish Image to DockerHub
         run: docker push psoakun/fp-pso:latest
-  
-      - name: Docker run (for development purpose)
-        run: docker run -d -p 3000:3000 psoakun/fp-pso
 
       # - name: Wait for application to start
       #   run: sleep 10  
