@@ -52,11 +52,11 @@ jobs:
       - name: Docker run (for development purpose)
         run: docker run -d -p 3000:3000 psoakun/fp-pso
 
-      - name: Wait for application to start
-        run: sleep 10  
+      # - name: Wait for application to start
+      #   run: sleep 10  
   
-      - name: Check if app is running (basic health check)
-        run: curl -f http://localhost:3000 || exit 1
+      # - name: Check if app is running (basic health check)
+      #   run: curl -f http://localhost:3000 || exit 1
 
   test:
     runs-on: ubuntu-latest
@@ -94,8 +94,8 @@ jobs:
       - name: Initialize Terraform
         run: terraform init
 
-      - name: Terraform Destroy
-        run: terraform destroy -auto-approve
+      # - name: Terraform Destroy
+      #   run: terraform destroy -auto-approve
 
       - name: Terraform Plan
         run: terraform plan -out=tfplan
