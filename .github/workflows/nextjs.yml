@@ -121,9 +121,6 @@ jobs:
       - name: Get instance IP
         run: echo "instance_ip=$(terraform output -raw instance_ip)" >> $GITHUB_ENV
 
-      - name: Print instance IP
-        run: echo "Instance IP: ${{ env.instance_ip }}"
-
       # - name: Install jq
       #   run: |
       #     sudo apt-get update
