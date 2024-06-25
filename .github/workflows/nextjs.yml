@@ -3,12 +3,12 @@ name : CICD Pipeline
 on:
   push:
     branches:
-      - development
+      - main
       
 jobs:
   build:
     runs-on: ubuntu-latest
-    # environment: STAGING
+    environment: PROD
 
     steps: 
       - name: Checkout Source
@@ -40,7 +40,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    environment: STAGING
+    environment: PROD
     needs: build  
 
     steps:
@@ -60,7 +60,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    # environment: STAGING
+    environment: PROD
     needs: test  
 
     steps:
