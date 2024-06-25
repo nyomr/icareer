@@ -122,6 +122,7 @@ jobs:
           echo "INSTANCE_IP=$INSTANCE_IP" >> $GITHUB_ENV
           echo ${{ env.INSTANCE_IP }}
 
+
       - name: Install jq
         run: |
           sudo apt-get update
