@@ -19,8 +19,8 @@ resource "tls_private_key" "rsa_4096" {
 }
 
 variable "key_name" {
-  description = "terraform-key"
-  default     = "terraform-key"  
+  description = "icareer-key"
+  default     = "icareer-key"  
 }
 
 resource "aws_key_pair" "service_key_pair" {
