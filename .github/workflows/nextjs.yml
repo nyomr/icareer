@@ -111,44 +111,45 @@ jobs:
           TF_VAR_access_key: AKIA3FLD5TGM3YFTURRH
           TF_VAR_secret_key: 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
 
-      # - name: Get Instance IP
-      #   id: instance_ip
-      #   run: |
-      #     INSTANCE_IP=$(terraform output -raw instance_ip)
-      #     echo "::set-output name=instance_ip::$INSTANCE_IP"
-      #     echo "INSTANCE_IP=$INSTANCE_IP" >> $GITHUB_ENV
-      #     echo ${{ env.INSTANCE_IP }}
-      - name: Get instance IP
-        run: echo "instance_ip=$(terraform output -raw instance_ip)" >> $GITHUB_ENV
+      - name: Wait for instance to settle
+        run: sleep 30
 
-      # - name: Install jq
-      #   run: |
-      #     sudo apt-get update
-      #     sudo apt-get install -y jq
+      - name: Get Instance IP
+        id: instance_ip
+        run: |
+          INSTANCE_IP=$(terraform output -raw instance_ip)
+          echo "::set-output name=instance_ip::$INSTANCE_IP"
+          echo "INSTANCE_IP=$INSTANCE_IP" >> $GITHUB_ENV
+          echo ${{ env.INSTANCE_IP }}
 
-      # - name: Get SSH Private Key
-      #   id: ssh_private_key
-      #   run: |
-      #     SSH_PRIVATE_KEY=$(terraform show -json | jq -r '.values.root_module.resources[] | select(.type == "tls_private_key" and .name == "rsa_4096") | .values.private_key_pem')
-      #     echo "${SSH_PRIVATE_KEY}" > ssh_private_key.pem
-      #     chmod 600 ssh_private_key.pem
-      #     echo "::set-output name=ssh_private_key::ssh_private_key.pem"
-      #     echo "$SSH_PRIVATE_KEY"
+      - name: Install jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
 
-      # - name: Push Docker Image to EC2 Instance
-      #   shell: /usr/bin/bash -e {0}
-      #   env:
-      #     AWS_REGION: ap-southeast-2
-      #     TF_VAR_access_key: AKIA3FLD5TGM3YFTURRH
-      #     TF_VAR_secret_key: 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
-      #     INSTANCE_IP: ${{ env.INSTANCE_IP }}
-      #   run: |
-      #     ssh -o StrictHostKeyChecking=no -i ssh_private_key.pem ubuntu@${{ env.INSTANCE_IP }} '
-      #       sudo apt-get update
-      #       sudo apt-get install -y docker.io
-      #       sudo systemctl start docker
-      #       sudo systemctl enable docker
-      #       sudo usermod -aG docker ubuntu
-      #       sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-      #       sudo docker pull ${{ secrets.DOCKER_USERNAME }}/fp-pso:latest
-      #       sudo docker run -d -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/fp-pso:latest  '
+      - name: Get SSH Private Key
+        id: ssh_private_key
+        run: |
+          SSH_PRIVATE_KEY=$(terraform show -json | jq -r '.values.root_module.resources[] | select(.type == "tls_private_key" and .name == "rsa_4096") | .values.private_key_pem')
+          echo "${SSH_PRIVATE_KEY}" > ssh_private_key.pem
+          chmod 600 ssh_private_key.pem
+          echo "::set-output name=ssh_private_key::ssh_private_key.pem"
+          echo "$SSH_PRIVATE_KEY"
+
+      - name: Push Docker Image to EC2 Instance
+        shell: /usr/bin/bash -e {0}
+        env:
+          AWS_REGION: ap-southeast-2
+          TF_VAR_access_key: AKIA3FLD5TGM3YFTURRH
+          TF_VAR_secret_key: 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
+          INSTANCE_IP: ${{ env.INSTANCE_IP }}
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ssh_private_key.pem ubuntu@${{ env.INSTANCE_IP }} '
+            sudo apt-get update
+            sudo apt-get install -y docker.io
+            sudo systemctl start docker
+            sudo systemctl enable docker
+            sudo usermod -aG docker ubuntu
+            sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/fp-pso:latest
+            sudo docker run -d -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/fp-pso:latest  '
