@@ -101,5 +101,5 @@ jobs:
         run: terraform plan -out=tfplan
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan       
+        run: TF_LOG=debug terraform apply -auto-approve tfplan       
       
