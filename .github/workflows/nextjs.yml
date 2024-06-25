@@ -114,9 +114,9 @@ jobs:
           AWS_REGION: ap-southeast-2
           TF_VAR_access_key: AKIA3FLD5TGM3YFTURRH
           TF_VAR_secret_key: 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
-          INSTANCE_IP: ${{ env.INSTANCE_IP }}
+          INSTANCE_IP: ${{ env.instance_ip }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i ssh_private_key.pem ubuntu@${{ env.INSTANCE_IP }} '
+          ssh -o StrictHostKeyChecking=no -i ssh_private_key.pem ubuntu@${{ env.instance_ip }} '
             sudo apt-get update
             sudo apt-get install -y docker.io
             sudo systemctl start docker
@@ -124,4 +124,4 @@ jobs:
             sudo usermod -aG docker ubuntu
             sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/fp-pso:latest
-            sudo docker run -d -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/fp-pso:latest
+            sudo docker run -d -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/fp-pso:latest  '
