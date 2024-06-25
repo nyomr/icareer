@@ -22,22 +22,18 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: "1.8.5"
 
-      - name: Initialize Terraform
-        run: terraform init
+      # - name: Initialize Terraform
+      #   run: terraform init
         
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: AKIA3FLD5TGMVDZBTLQZ
-          aws-secret-access-key: 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
-          aws-region: us-east-1
-          # role-to-assume: arn:aws:iam::767398091161:user/terraform-github
-          managed-session-policies: arn:aws:iam::aws:policy/AmazonEC2FullAccess
+      # - name: Configure AWS Credentials
+      #   uses: aws-actions/configure-aws-credentials@v4
+      #   with:
+      #     aws-access-key-id: AKIA3FLD5TGMVDZBTLQZ
+      #     aws-secret-access-key: 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
+      #     aws-region: us-east-1
+      #     # role-to-assume: arn:aws:iam::767398091161:user/terraform-github
+      #     managed-session-policies: arn:aws:iam::aws:policy/AmazonEC2FullAccess
 
       - name: Build App
         run: npm run build
@@ -85,6 +81,11 @@ jobs:
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: "1.8.5"
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
