@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import PostTable from "@/components/Table"; 
+import Search from "@/components/Search";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Navbar />
       <main className="hero-welcome px-20 min-h-screen flex flex-col justify-center items-center">
         <div className="hero-content text-center">
+          <Search />
           <h1 className="latest-jobs font-inter">Latest Jobs</h1>
           <div className="rounded-lg shadow-md py-8 w-full max-w-4xl">
             <PostTable />
