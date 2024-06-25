@@ -108,6 +108,15 @@ jobs:
           TF_VAR_access_key: AKIA3FLD5TGM3YFTURRH
           TF_VAR_secret_key: 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
 
+      - name: Get Instance IP
+        id: instance_ip
+        run: |
+          INSTANCE_IP=$(terraform output -raw instance_ip)
+          echo "::set-output name=instance_ip::$INSTANCE_IP"
+          echo "INSTANCE_IP=$INSTANCE_IP" >> $GITHUB_ENV
+          echo ${{ env.INSTANCE_IP }}
+
+
       - name: Push Docker Image to EC2 Instance
         shell: /usr/bin/bash -e {0}
         env:
@@ -116,7 +125,7 @@ jobs:
           TF_VAR_secret_key: I8N/vNlyG+m7Eft2iI5zrpdqVUShyF4aIpgj4Xu3
           INSTANCE_IP: ${{ env.instance_ip }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i ssh_private_key.pem ubuntu@${{ env.instance_ip }} '
+          ssh -o StrictHostKeyChecking=no -i ssh_private_key.pem ubuntu@${{ env.INSTANCE_IP }} '
             sudo apt-get update
             sudo apt-get install -y docker.io
             sudo systemctl start docker
