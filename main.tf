@@ -19,8 +19,8 @@ resource "tls_private_key" "rsa_4096" {
 }
 
 variable "key_name" {
-  description = "icareer-key"
-  default     = "icareer-key"  
+  description = "icareer_key"
+  default     = "icareer_key"  
 }
 
 resource "aws_key_pair" "service_key_pair" {
