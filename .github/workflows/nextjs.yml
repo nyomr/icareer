@@ -29,6 +29,13 @@ jobs:
 
       - name: Initialize Terraform
         run: terraform init
+        
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 
       - name: Build App
         run: npm run build
@@ -80,17 +87,6 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          inline-session-policy: >-
-            {
-            	"Version": "2012-10-17",
-            	"Statement": [
-            		{
-            			"Effect": "Allow",
-            			"Action": "ec2:RunInstances",
-            			"Resource": "*"
-            		}
-            	]
-            }
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
