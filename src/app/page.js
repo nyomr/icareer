@@ -9,7 +9,7 @@ export default function Home() {
       <Navbar />
       <main className="hero-welcome px-20 min-h-screen grid place-items-center max-w-4xl">
         <div className="hero-content">
-          <h1 className="title-hero font-inter">Testing</h1>
+          <h1 className="title-hero font-inter">Find Your Dream in the World of Career</h1>
           <p className="sub-title-hero font-inter py-4">Dive into the world of careers and discover your perfect fit. Start exploring today!</p>
         </div>
       </main>
