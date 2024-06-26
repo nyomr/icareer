@@ -7,7 +7,7 @@ describe('Home Page', () => {
   test('renders the home page with title and subtitle', () => {
     render(<Home />);
 
-    expect(screen.getByText('Find Your Dream in the World of Career')).toBeInTheDocument();
+    expect(screen.getByText('Testing')).toBeInTheDocument();
     expect(screen.getByText('Dive into the world of careers and discover your perfect fit. Start exploring today!')).toBeInTheDocument();
   });
 
